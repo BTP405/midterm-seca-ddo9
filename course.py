@@ -22,7 +22,13 @@ class Course:
             sections (int, optional): The number of sections available for the course (default is 1).
             prerequisites (list, optional): List of prerequisite courses for the course (default is None).
         """
-        pass
+        self.course_name = course_name
+        self.instructor = instructor
+        self.sections = sections
+        self.prerequisites = prerequisites
+        self.enrolled_students = []
+        self.waitlisted_students = []
+        self.assessments = []
 
 
     def add_student(self, student):
@@ -31,7 +37,11 @@ class Course:
         Args:
             student (Student): The student object to be enrolled or added to the waitlist.
         """
-        pass
+        if (self.sections == 0):
+            self.waitlisted_students.append(student)
+        else:
+            self.enrolled_students.append(student)
+            self.sections = self.sections - 1        
 
 
     def remove_student(self, student):
@@ -40,8 +50,16 @@ class Course:
         Args:
             student (Student): The student object to be removed from the course or waitlist.
         """
-        pass
-
+        removed = False
+        for i in range(len(self.enrolled_students)):
+            if (self.enrolled_students[i] == student):
+                self.enrolled_students[i] = []
+                removed = True
+        
+        if (not removed):
+            for i in range(len(self.waitlisted_students)):
+                if (self.waitlisted_students[i] == student):
+                    self.waitlisted_students[i] = []
 
     def add_instructor(self, instructor):
         """Assign an instructor to the course.
@@ -49,7 +67,7 @@ class Course:
         Args:
             instructor (str): The name of the instructor to be assigned to the course.
         """
-        pass
+        self.instructor = instructor
 
     def add_assessment(self, assessment):
         """Add an assessment to the course.
@@ -57,5 +75,5 @@ class Course:
         Args:
             assessment (str): The description of the assessment to be added.
         """
-        pass
+        self.assessment = assessment
 
