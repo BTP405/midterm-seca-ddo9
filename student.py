@@ -29,7 +29,10 @@ class Student:
             name (str): The name of the student.
             student_id (int): The unique ID of the student.
         """
-        pass
+        self.name = name
+        self.student_id = student_id
+        self.enrolled_courses = []
+        self.grades = {}
 
 
     def enroll_course(self, course):
@@ -42,7 +45,16 @@ class Student:
         Returns:
             None
         """
-        pass
+        # prerequisiteMet = True
+        # coursesTaken = list(self.grades)
+        # coursesTaken = coursesTaken + self.enrolled_courses
+        # # for prereq in course.prerequisites:
+        # #     prerequisiteMet = prereq in coursesTaken
+        # #     if (not prerequisiteMet):
+        # #         break
+        # # if (prerequisiteMet):
+        # if (course in coursesTaken):
+        course.add_student(self)
 
     def drop_course(self, course):
         """
@@ -54,7 +66,7 @@ class Student:
         Returns:
             None
         """
-        pass
+        course.remove_student(self)
 
 
     def submit_grade(self, course, assessment, grade):
@@ -69,4 +81,5 @@ class Student:
         Returns:
             None
         """
-        pass
+        self.grades[course] = grade
+        self.grades[assessment] = grade
